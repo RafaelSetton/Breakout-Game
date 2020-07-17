@@ -54,3 +54,24 @@ class Ball:
 
     def blit(self):
         pygame.draw.circle(self.screen, (255, 255, 255), (int(self.x), int(self.y)), int(self.SIZE / 2))
+
+    def collision(self, min_v, max_v, x=None, y=None):
+        if x is None and y is None:
+            raise ValueError("Um dos valores precisa ser informado")
+        elif x is None:
+            delta = (self.SIZE/2) ** 2 - (y - self.center[1]) ** 2
+            x = (self.center[0] + delta**0.5, self.center[0] - delta**0.5)
+            for solve in x:
+                if type(solve) == complex:
+                    return False
+                if min_v <= solve <= max_v:
+                    return True
+        else:
+            delta = (self.SIZE/2) ** 2 - (x - self.center[0]) ** 2
+            y = (self.center[1] + delta ** 0.5, self.center[1] - delta ** 0.5)
+            for solve in y:
+                if type(solve) == complex:
+                    return False
+                if min_v <= solve <= max_v:
+                    return True
+        return False

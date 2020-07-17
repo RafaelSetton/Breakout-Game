@@ -16,10 +16,11 @@ class Bricks:
             once(*brick)
 
     def create(self):
+        qtd = 10
         ini_x = 20
         ini_y = 30
-        dif_x = (self.screen.get_width() - 20) / 9
+        dif_x = (self.screen.get_width() - 20) / qtd
         dif_y = 50
         for l in range(5):
-            for c in range(10):
+            for c in range(qtd):
                 yield (self.colors[l], ini_x + c * dif_x, ini_y + l * dif_y)
